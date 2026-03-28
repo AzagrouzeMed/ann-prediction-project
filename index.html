@@ -21,22 +21,12 @@
             box-shadow: 0 0 15px rgba(0,0,0,0.1);
         }
 
-        h1 {
-            color: #333;
-        }
-
-        p.subtitle {
-            color: gray;
-            font-size: 14px;
-        }
-
         input {
             width: 85%;
             padding: 12px;
             margin: 10px;
             border-radius: 8px;
             border: 1px solid #ccc;
-            font-size: 14px;
         }
 
         button {
@@ -46,11 +36,6 @@
             border: none;
             border-radius: 8px;
             cursor: pointer;
-            font-size: 15px;
-        }
-
-        button:hover {
-            background: #0056b3;
         }
 
         .result {
@@ -79,44 +64,46 @@
 <div class="container">
 
     <h1>🧠 Prédiction Achat (ANN)</h1>
-    <p class="subtitle">Mini projet Machine Learning</p>
 
-    <form action="/predict_form" method="post">
-        <input type="number" name="age" placeholder="Age" min="18" max="100" required><br>
-        <input type="number" name="salary" placeholder="Salaire" min="1000" max="10000" required><br>
-        <input type="number" name="visits" placeholder="Visites" min="1" max="20" required><br>
+    <input type="number" id="age" placeholder="Age"><br>
+    <input type="number" id="salary" placeholder="Salaire"><br>
+    <input type="number" id="visits" placeholder="Visites"><br>
 
-        <button type="submit"> Prédire</button>
-    </form>
+    <button onclick="predict()">Prédire</button>
 
-    {% if prediction %}
-        <div class="result">
-            📊 Probabilité d'achat : {{ prediction }} %
+    <div class="result" id="result"></div>
 
-            {% if prediction > 50 %}
-                <p style="color:green;">🟢 Client susceptible d'acheter</p>
-            {% else %}
-                <p style="color:red;">🔴 Client peu susceptible d'acheter</p>
-            {% endif %}
-        </div>
-
-        <!-- Barre dynamique -->
-        <div class="bar-container">
-            <div class="bar"
-                style="
-                    width: {{ prediction }}%;
-                    {% if prediction > 50 %}
-                        background: green;
-                    {% else %}
-                        background: red;
-                    {% endif %}
-                ">
-                {{ prediction }} %
-            </div>
-        </div>
-    {% endif %}
+    <div class="bar-container">
+        <div class="bar" id="bar"></div>
+    </div>
 
 </div>
+
+<script>
+function predict() {
+    let age = document.getElementById("age").value;
+    let salary = document.getElementById("salary").value;
+    let visits = document.getElementById("visits").value;
+
+    // Simulation ANN (simple)
+    let score = (age/100 + salary/10000 + visits/20) / 3;
+    let prediction = (score * 100).toFixed(2);
+
+    let resultText = "📊 Probabilité d'achat : " + prediction + " %";
+
+    if (prediction > 50) {
+        resultText += "<br><span style='color:green;'>🟢 Client susceptible d'acheter</span>";
+        document.getElementById("bar").style.background = "green";
+    } else {
+        resultText += "<br><span style='color:red;'>🔴 Client peu susceptible d'acheter</span>";
+        document.getElementById("bar").style.background = "red";
+    }
+
+    document.getElementById("result").innerHTML = resultText;
+    document.getElementById("bar").style.width = prediction + "%";
+    document.getElementById("bar").innerHTML = prediction + "%";
+}
+</script>
 
 </body>
 </html>
