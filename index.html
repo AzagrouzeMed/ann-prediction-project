@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ANN Prediction</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #f4f6f9;
+            text-align: center;
+        }
+
+        .container {
+            margin-top: 50px;
+            background: white;
+            padding: 30px;
+            width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        p.subtitle {
+            color: gray;
+            font-size: 14px;
+        }
+
+        input {
+            width: 85%;
+            padding: 12px;
+            margin: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
+
+        button {
+            padding: 12px 25px;
+            background: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+
+        .bar-container {
+            background: #eee;
+            border-radius: 10px;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .bar {
+            color: white;
+            padding: 6px;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🧠 Prédiction Achat (ANN)</h1>
+    <p class="subtitle">Mini projet Machine Learning</p>
+
+    <form action="/predict_form" method="post">
+        <input type="number" name="age" placeholder="Age" min="18" max="100" required><br>
+        <input type="number" name="salary" placeholder="Salaire" min="1000" max="10000" required><br>
+        <input type="number" name="visits" placeholder="Visites" min="1" max="20" required><br>
+
+        <button type="submit"> Prédire</button>
+    </form>
+
+    {% if prediction %}
+        <div class="result">
+            📊 Probabilité d'achat : {{ prediction }} %
+
+            {% if prediction > 50 %}
+                <p style="color:green;">🟢 Client susceptible d'acheter</p>
+            {% else %}
+                <p style="color:red;">🔴 Client peu susceptible d'acheter</p>
+            {% endif %}
+        </div>
+
+        <!-- Barre dynamique -->
+        <div class="bar-container">
+            <div class="bar"
+                style="
+                    width: {{ prediction }}%;
+                    {% if prediction > 50 %}
+                        background: green;
+                    {% else %}
+                        background: red;
+                    {% endif %}
+                ">
+                {{ prediction }} %
+            </div>
+        </div>
+    {% endif %}
+
+</div>
+
+</body>
+</html>
