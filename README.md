@@ -46,3 +46,7 @@ L’application inclut une API Flask ainsi qu’une interface web interactive pe
 
 ```bash
 python app.py
+
+
+###lien
+https://azagrouzemed.github.io/ann-prediction-project/
