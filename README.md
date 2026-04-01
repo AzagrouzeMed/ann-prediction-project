@@ -32,8 +32,14 @@ L’application inclut une API Flask ainsi qu’une interface web interactive pe
 
 ---
 
-## 📸 Aperçu
-<img width="771" height="977" alt="Capture d’écran 2026-03-28 203850" src="https://github.com/user-attachments/assets/2325daa0-241b-4189-b2d0-1c3fc7e02546" />
+## 📸 Résultats du modèle ANN
+
+### 🟢 Cas positif
+<img width="1919" height="1084" alt="verte" src="https://github.com/user-attachments/assets/f5b66aa6-b59e-4970-88b5-7896b3b8e2b0" />
+
+### 🔴 Cas négatif
+<img width="1919" height="1093" alt="rouge" src="https://github.com/user-attachments/assets/f2ef72d0-0617-4368-92ac-41274b8d9e04" />
+
 
 👉 Interface web avec prédiction et visualisation
 
